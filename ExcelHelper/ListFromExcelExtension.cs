@@ -18,13 +18,9 @@ namespace ExcelHelper
         /// <param name="filePath">文件路径 支持 xlsx文件</param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public static IEnumerable<T> FromExcel<T>(this string filePath)
+        public static IEnumerable<T> ReadToList<T>(this string filePath)
         {
-            if (Path.GetExtension(filePath) != ".xlsx")
-            {
-                throw new Exception("不支持的扩展名, 请使用xlsx文件");
-            }
-            return new ExcelMapper(filePath).Fetch<T>();
+            return LoadFromExcel<T>(filePath);
 
         }
         /// <summary>
@@ -43,7 +39,7 @@ namespace ExcelHelper
             return new ExcelMapper(filePath).Fetch<T>();
         }
 
-        public static IEnumerable<T> ReadExcelToList<T>(this IFormFile file)
+        public static IEnumerable<T> ReadFormFileExcelToList<T>(this IFormFile file)
         {
             using (var writer = new MemoryStream())
             {
