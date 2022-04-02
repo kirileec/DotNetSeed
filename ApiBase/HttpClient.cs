@@ -8,7 +8,13 @@ using System.Threading.Tasks;
 
 namespace ApiBase
 {
-    public class SimpleHttpClient
+
+    public interface ISingleClient
+    {
+
+    }
+
+    public class SimpleHttpClient: ISingleClient
     {
         private RestClient _client = null;
 

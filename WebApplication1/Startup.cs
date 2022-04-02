@@ -124,7 +124,7 @@ namespace WebApplication1
                 options.MaxRequestBodySize = int.MaxValue; // or your desired value
             });
             services.AddHeiCaptcha(); //验证码服务
-   
+           
             GlobalServiceProvider.ServiceProvider = services.BuildServiceProvider();
         }
 
