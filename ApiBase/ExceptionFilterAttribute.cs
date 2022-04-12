@@ -29,7 +29,7 @@ namespace ApiBase.Attributes
                 var str = $"{ frame.GetFileName() }:{line}->{frame.GetMethod().Name}";
 
 
-                context.Result = new JsonResult(new BaseResponse<string>
+                context.Result = new JsonResult(new ResponseData<string>
                 {
                     code = BaseController.CODE_ERROR,
                     msg = context.Exception.Message,

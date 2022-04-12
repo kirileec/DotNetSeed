@@ -1,4 +1,4 @@
-﻿using Global;
+﻿using Helper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -33,14 +33,14 @@ namespace ApiBase
         }
         protected JsonResult Success()
         {
-            return Json(new BaseResponse<object>
+            return Json(new ResponseData<object>
             {
                 code = CODE_SUCCESS
             });
         }
         protected JsonResult Success(object data)
         {
-            return Json(new BaseResponse<object>
+            return Json(new ResponseData<object>
             {
                 code = CODE_SUCCESS,
                 data = data
@@ -48,7 +48,7 @@ namespace ApiBase
         }
         protected JsonResult Success<T>(T data)
         {
-            return Json(new BaseResponse<T>
+            return Json(new ResponseData<T>
             {
                 code = CODE_SUCCESS,
                 data = data
@@ -68,7 +68,7 @@ namespace ApiBase
         }
         protected JsonResult Data<T>(long count,IEnumerable<T> data)
         {
-            return Json(new BaseResponse<IEnumerable<T>>
+            return Json(new ResponseData<IEnumerable<T>>
             {
                 code = CODE_SUCCESS,
                 count = count,
@@ -77,7 +77,7 @@ namespace ApiBase
         }
         protected JsonResult Data<T>(int count, IEnumerable<T> data)
         {
-            return Json(new BaseResponse<IEnumerable<T>>
+            return Json(new ResponseData<IEnumerable<T>>
             {
                 code = CODE_SUCCESS,
                 count = count,
@@ -86,7 +86,7 @@ namespace ApiBase
         }
         protected JsonResult Fail(string msg)
         {
-            return Json(new BaseResponse<string>
+            return Json(new ResponseData<string>
             {
                 code = CODE_FAIL,
                 msg = msg
@@ -94,7 +94,7 @@ namespace ApiBase
         }
         protected JsonResult Error(string msg)
         {
-            return Json(new BaseResponse<string>
+            return Json(new ResponseData<string>
             {
                 code = CODE_ERROR,
                 msg = msg
@@ -102,7 +102,7 @@ namespace ApiBase
         }
         protected JsonResult Error(Exception ex)
         {
-            return Json(new BaseResponse<string>
+            return Json(new ResponseData<string>
             {
                 code = CODE_ERROR,
                 msg = ex.Message,
@@ -111,7 +111,7 @@ namespace ApiBase
         }
         protected JsonResult Message(string msg)
         {
-            return Json(new BaseResponse<string>
+            return Json(new ResponseData<string>
             {
                 code = CODE_SUCCESS,
                 msg = msg

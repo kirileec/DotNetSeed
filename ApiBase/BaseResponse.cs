@@ -8,11 +8,15 @@ using System.Threading.Tasks;
 namespace ApiBase
 {
 
-    [KnownType(typeof(BaseResponse<string>))]
-    public class BaseResponse<T>
+    public class Response : BaseResponse<string, string> { }
+    public class ResponseData<T> : BaseResponse<string, T> { }
+
+
+    [KnownType(typeof(BaseResponse<string,string>))]
+    public class BaseResponse<E,T>
     {
         
-        public string code { get; set; }
+        public E code { get; set; }
         public long count { get; set; }
         public string msg { get; set; }
         public T data { get; set; }

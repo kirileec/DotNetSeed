@@ -1,4 +1,5 @@
 ﻿using EasyCaching.Core;
+using Helper;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace ApiBase
         private readonly IEasyCachingProvider _provider;
         public TokenProvider()
         {
-            _provider = Global.GlobalServiceProvider.ServiceProvider.GetRequiredService<IEasyCachingProvider>();
+            _provider = GlobalServiceProvider.ServiceProvider.GetRequiredService<IEasyCachingProvider>();
         }
         /// <summary>
         /// 创建Token

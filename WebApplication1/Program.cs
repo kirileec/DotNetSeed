@@ -26,6 +26,6 @@ namespace WebApplication1
                         options.Limits.MaxRequestBodySize = 524288000;
                     });
                     webBuilder.UseStartup<Startup>();
-                });
+                }).UseDefaultServiceProvider(e=>e.ValidateScopes = false);
     }
 }

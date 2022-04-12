@@ -1,9 +1,13 @@
 ﻿using ApiBase;
 using EasyCaching.Core;
+using EFCore;
 using Hei.Captcha;
+using Helper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Linq;
 
 namespace WebApplication1.Controllers
 {
@@ -31,6 +35,12 @@ namespace WebApplication1.Controllers
         public JsonResult NeedAuthorizationHeader(string hello)
         {
             return Message($"Hello2 {hello}!");
+        }
+        [HttpGet("TestServiceProvider")]
+        public JsonResult TestServiceProvider([FromServices] MyDbContext db)
+        {
+            var _db = GlobalServiceProvider.ServiceProvider.GetRequiredService<MyDbContext>();
+            return Data(db.deploy_history.Where(e=>true).Count());
         }
 
     }

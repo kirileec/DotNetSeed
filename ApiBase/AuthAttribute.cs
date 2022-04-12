@@ -62,7 +62,7 @@ namespace ApiBase
                         return;
                     }
                     context.HttpContext.Response.StatusCode = 401;
-                    context.Result = new JsonResult(new BaseResponse<string>
+                    context.Result = new JsonResult(new ResponseData<string>
                     {
                         code = BaseController.CODE_UNAUTH,
                         msg = "接口需要鉴权"
@@ -211,7 +211,7 @@ namespace ApiBase
             operation.Responses.Clear();
             operation.Responses.Add("200", new NSwag.OpenApiResponse
             {
-                Schema = JsonSchema.FromType<BaseResponse<string>>()
+                Schema = JsonSchema.FromType<ResponseData<string>>()
 
             }) ;
 

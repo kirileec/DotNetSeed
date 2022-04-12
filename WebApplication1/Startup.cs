@@ -1,24 +1,23 @@
 using ApiBase;
 using ApiBase.Attributes;
-using Global;
+using EFCore;
 using Hei.Captcha;
+using Helper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Serialization;
 using Serilog;
 using Serilog.Events;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
-using System.Threading.Tasks;
 
 namespace WebApplication1
 {
@@ -43,6 +42,12 @@ namespace WebApplication1
                 //.WriteTo.EventLog("JDManagerNew")
                 .WriteTo.RollingFile("./logs/log-{Date}.log")
                 .CreateLogger();
+            var dsn = "DataSource=sh-cdb-3ql7v8s2.sql.tencentcdb.com;port=63816;DataBase=deploy;uid=qjroot;pwd=qijin=mysql;Character Set=utf8;";
+            services.AddDbContext<MyDbContext>(options =>
+            {
+                options.UseMySql(dsn, ServerVersion.AutoDetect(dsn));
+                options.LogTo(Log.Logger.Information, LogLevel.Information, null);
+            }, ServiceLifetime.Transient);
 
             //缓存
             services.AddEasyCaching(options =>
@@ -125,7 +130,7 @@ namespace WebApplication1
             });
             services.AddHeiCaptcha(); //验证码服务
            
-            GlobalServiceProvider.ServiceProvider = services.BuildServiceProvider();
+            //GlobalServiceProvider.ServiceProvider = services.BuildServiceProvider();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -163,6 +168,7 @@ namespace WebApplication1
                     return context.Response.SendFileAsync("swagger_theme.css");
                 });
             });
+            GlobalServiceProvider.ServiceProvider = app.ApplicationServices;
 
         }
     }

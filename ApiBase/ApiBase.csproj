@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Global\Global.csproj" />
+    <ProjectReference Include="..\Helper\Helper.csproj" />
   </ItemGroup>
 
 </Project>

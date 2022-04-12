@@ -18,5 +18,16 @@ namespace EFCore
         {
 
         }
+
+        public DbSet<deploy_history> deploy_history { get; set; }
+
+
+    }
+
+    public class deploy_history
+    {
+        public long Id { get; set; }
+        public string Name { get; set; }
+        public string Domain { get; set; }
     }
 }
