@@ -42,7 +42,7 @@ namespace WebApplication1
                 //.WriteTo.EventLog("JDManagerNew")
                 .WriteTo.RollingFile("./logs/log-{Date}.log")
                 .CreateLogger();
-            var dsn = "DataSource=sh-cdb-3ql7v8s2.sql.tencentcdb.com;port=63816;DataBase=deploy;uid=qjroot;pwd=qijin=mysql;Character Set=utf8;";
+            var dsn = "";
             services.AddDbContext<MyDbContext>(options =>
             {
                 options.UseMySql(dsn, ServerVersion.AutoDetect(dsn));
