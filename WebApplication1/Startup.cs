@@ -101,7 +101,7 @@ namespace WebApplication1
                 doc.UseXmlDocumentation = true;
                 doc.GenerateEnumMappingDescription = true;
                 doc.OperationProcessors.Add(new AuthAttribute());
-
+                doc.DocumentProcessors.Add(new AddAdditionalTypeProcessor<BaseResponse<string,string>>());
 
 
             });

@@ -11,12 +11,11 @@ using System.Linq;
 
 namespace WebApplication1.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
+    
     public class DemoController : BaseController
     {
         
-        [HttpGet("GetCaptcha")]
+        //[HttpGet("GetCaptcha")]
         public JsonResult GetCaptcha([FromServices]SecurityCodeHelper _securityCode, [FromServices] IEasyCachingProviderFactory _factory)
         {
             var code = _securityCode.GetRandomEnDigitalText(4);
@@ -31,12 +30,12 @@ namespace WebApplication1.Controllers
             return Data(resp);
         }
         [Auth]
-        [HttpGet("NeedAuthorizationHeader")]
-        public JsonResult NeedAuthorizationHeader(string hello)
+        //[HttpGet("NeedAuthorizationHeader")]
+        public IActionResult NeedAuthorizationHeader(string hello)
         {
             return Message($"Hello2 {hello}!");
         }
-        [HttpGet("TestServiceProvider")]
+        //[HttpGet("TestServiceProvider")]
         public JsonResult TestServiceProvider([FromServices] MyDbContext db)
         {
             var _db = GlobalServiceProvider.ServiceProvider.GetRequiredService<MyDbContext>();

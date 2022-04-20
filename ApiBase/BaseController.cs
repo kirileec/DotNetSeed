@@ -9,6 +9,8 @@ using System.Collections.Generic;
 
 namespace ApiBase
 {
+    [Route("api/[controller]/[action]")]
+    [ApiController]
     public abstract class BaseController: ControllerBase
     {
         private readonly ILogger _logger;

@@ -12,6 +12,13 @@ using System.Reflection;
 
 namespace ApiBase
 {
+    public sealed class AddAdditionalTypeProcessor<T> : IDocumentProcessor where T : class
+    {
+        public void Process(DocumentProcessorContext context)
+        {
+            context.SchemaResolver.AddSchema(typeof(T), isIntegerEnumeration: false, JsonSchema.FromType<T>());
+        }
+    }
     /// <summary>
     /// 需要token
     /// <para>可以用于Controller或者方法</para>
